@@ -4,4 +4,4 @@ import 'package:flutter/material.dart';
 const kPrimaryColor = Color(0xFF0D47A1);
 const kPrimaryLightColor = Color(0xFFBBDEFB);
 
-const double defaultPadding = 16.0; // commonly used to add space around UI elements
+const double defaultPadding = 16.0; // use to add space around UI elements
