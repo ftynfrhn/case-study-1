@@ -4,18 +4,21 @@ import '../../Responsive.dart';
 import '../../Component/background.dart';
 import '../../../constants.dart';
 import 'login_form.dart';
+import 'admin_login.dart';
 
 class UserLogin extends StatelessWidget {
   const UserLogin({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return const Background(
+    bool isAdmin = false;
+    print('isAdmin in UserLogin: $isAdmin');
+    return Background(
       child: SingleChildScrollView(
         child: SafeArea(
           child: Responsive(
-          mobile: MobileLoginScreen(),
-          desktop: DesktopLoginScreen(),
+          mobile: MobileLoginScreen(isAdmin: isAdmin),
+          desktop: DesktopLoginScreen(isAdmin: isAdmin),
         ),
         )
       ),
@@ -24,12 +27,15 @@ class UserLogin extends StatelessWidget {
 }
 
 class MobileLoginScreen extends StatelessWidget {
+  final bool isAdmin;
   const MobileLoginScreen({
     Key? key,
+    required this.isAdmin,
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
+    print('isAdmin in MobileLoginScreen: $isAdmin');
     return Column(
       mainAxisAlignment: MainAxisAlignment.center,
       children: <Widget>[
@@ -39,24 +45,41 @@ class MobileLoginScreen extends StatelessWidget {
             Spacer(),
             Expanded(
               flex: 8,
-              child: LoginForm(),
+              child: LoginForm(isAdmin: isAdmin),
             ),
             Spacer(),
           ],
+         ),
+        Padding(
+          padding: const EdgeInsets.only(top: 20.0), // Add padding top
+          child: GestureDetector(
+            onTap: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => AdminLogin()),
+              );
+            },
+            child: Text(
+              "Login As Admin",
+              style: TextStyle(color: kPrimaryColor),
+            ),
+          ),
         ),
       ],
     );
   }
 }
 
-
 class DesktopLoginScreen extends StatelessWidget {
+  final bool isAdmin;
   const DesktopLoginScreen({
     Key? key,
+    required this.isAdmin,
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
+    print('isAdmin in DesktopLoginScreen: $isAdmin');
     return Row(
       mainAxisAlignment: MainAxisAlignment.end,
       children: [
@@ -69,7 +92,22 @@ class DesktopLoginScreen extends StatelessWidget {
             children: [
               SizedBox(
                 width: 450,
-                child: LoginForm(),
+                child: LoginForm(isAdmin: isAdmin),
+              ),
+              Padding(
+                padding: const EdgeInsets.only(top: 20.0), // Add padding top
+                child: GestureDetector(
+                  onTap: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(builder: (context) => AdminLogin()),
+                    );
+                  },
+                  child: Text(
+                    "Login As Admin",
+                    style: TextStyle(color: kPrimaryColor),
+                  ),
+                ),
               ),
             ],
           ),
@@ -78,6 +116,7 @@ class DesktopLoginScreen extends StatelessWidget {
     );
   }
 }
+
 
 class LoginScreenTopImage extends StatelessWidget {
   const LoginScreenTopImage({

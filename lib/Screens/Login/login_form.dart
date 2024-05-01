@@ -1,14 +1,16 @@
 import 'package:flutter/material.dart';
 
-import '../../Component/admin_user_check.dart';
 import '../../constants.dart';
-import 'admin_login.dart';
+import '../Dashboard/admin_dashboard.dart';
+import '../Dashboard/user_dashboard.dart';
 
 class LoginForm extends StatelessWidget {
-  const LoginForm({Key? key}) : super(key: key);
+  final bool isAdmin;
+  const LoginForm({Key? key, required this.isAdmin}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
+    print('isAdmin in LoginForm: $isAdmin');
     return Form(
       child: Column(
         children: [
@@ -32,7 +34,20 @@ class LoginForm extends StatelessWidget {
           ),
           const SizedBox(height: defaultPadding * 3),
           ElevatedButton(
-            onPressed: () {},
+            onPressed: () {
+              if (isAdmin) {
+                Navigator.push(
+                  context, 
+                  MaterialPageRoute(builder: (context) => AdminDashboard()),
+                );
+              } else {
+                // login as user
+                Navigator.push(
+                  context, 
+                  MaterialPageRoute(builder: (context) => UserDashboard()),
+                );
+              }
+            },
             style: ElevatedButton.styleFrom(
               backgroundColor: Colors.green,
               padding: const EdgeInsets.symmetric(
@@ -40,7 +55,8 @@ class LoginForm extends StatelessWidget {
                 vertical: defaultPadding,
               ),
             ),
-            child: Text("Login".toUpperCase(),
+            child: Text(
+              "Login".toUpperCase(),
               style: const TextStyle(
                 fontSize: 15,
                 fontWeight: FontWeight.w600,
@@ -48,16 +64,6 @@ class LoginForm extends StatelessWidget {
               ),
             ),
           ),
-          const SizedBox(height: defaultPadding * 2),
-          AdminUserCheck(
-            press: () {
-              Navigator.push(
-                context, 
-                MaterialPageRoute(builder: (context) {
-                  return const AdminLogin();
-                })
-              );
-          })
         ],
       ),
     );

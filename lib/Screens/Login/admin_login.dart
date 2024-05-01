@@ -14,8 +14,8 @@ class AdminLogin extends StatelessWidget {
     return const Background(
       child: SingleChildScrollView(
         // child: Responsive(
-        //   mobile: MobileLoginScreen(),
-        //   desktop: DesktopLoginScreen(),
+        //   mobile: MobileLoginScreen(isAdmin: true),
+        //   desktop: DesktopLoginScreen(isAdmin: true),
         // ),
       ),
     );
