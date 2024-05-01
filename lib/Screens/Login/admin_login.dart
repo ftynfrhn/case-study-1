@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import '../../Component/background.dart';
 import '../../../constants.dart';
 import '../../Responsive.dart';
-import 'LoginForm.dart';
+import 'login_form.dart';
 
 // ana roughly create ni sebab nak avoid error, edit la 
 class AdminLogin extends StatelessWidget {
