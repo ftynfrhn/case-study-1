@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-
-import '../../../background.dart';
-import '../../../constants.dart';
 import '../../Responsive.dart';
+
+import '../../Component/background.dart';
+import '../../../constants.dart';
 import 'LoginForm.dart';
 
 class UserLogin extends StatelessWidget {
@@ -12,10 +12,12 @@ class UserLogin extends StatelessWidget {
   Widget build(BuildContext context) {
     return const Background(
       child: SingleChildScrollView(
-        child: Responsive(
+        child: SafeArea(
+          child: Responsive(
           mobile: MobileLoginScreen(),
           desktop: DesktopLoginScreen(),
         ),
+        )
       ),
     );
   }
@@ -47,6 +49,7 @@ class MobileLoginScreen extends StatelessWidget {
   }
 }
 
+
 class DesktopLoginScreen extends StatelessWidget {
   const DesktopLoginScreen({
     Key? key,
@@ -55,12 +58,13 @@ class DesktopLoginScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Row(
+      mainAxisAlignment: MainAxisAlignment.end,
       children: [
         Expanded(
           child: LoginScreenTopImage(),
         ),
         Expanded(
-          child: Row(
+          child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               SizedBox(
@@ -82,22 +86,14 @@ class LoginScreenTopImage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
+    return const Column(
       children: [
-        const Text(
+        Text(
           "USER LOGIN",
-          style: TextStyle(fontWeight: FontWeight.bold, fontSize: 24),
+          style: TextStyle(fontWeight: FontWeight.bold, fontSize: 32),
         ),
-        const SizedBox(height: defaultPadding * 2),
-        Row(
-          children: [
-            const Spacer(),
-          ],
-        ),
-        const SizedBox(height: defaultPadding * 2),
+        SizedBox(height: defaultPadding * 4),
       ],
     );
   }
 }
-
-
