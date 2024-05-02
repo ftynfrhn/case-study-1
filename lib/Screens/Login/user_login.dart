@@ -1,20 +1,20 @@
 import 'package:flutter/material.dart';
 import '../../Responsive.dart';
-
 import '../../Component/background.dart';
 import '../../../constants.dart';
 import 'login_form.dart';
 import 'admin_login.dart';
 
+// set user login screen layout & provide navigation to admin login screen
 class UserLogin extends StatelessWidget {
   const UserLogin({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     bool isAdmin = false;
-    print('isAdmin in UserLogin: $isAdmin');
+    //print('isAdmin in UserLogin: $isAdmin');
     return Background(
-      child: SingleChildScrollView(
+      child: SingleChildScrollView( // ensures contain scrollable
         child: SafeArea(
           child: Responsive(
           mobile: MobileLoginScreen(isAdmin: isAdmin),
@@ -35,31 +35,32 @@ class MobileLoginScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    print('isAdmin in MobileLoginScreen: $isAdmin');
-    return Column(
-      mainAxisAlignment: MainAxisAlignment.center,
+    //print('isAdmin in MobileLoginScreen: $isAdmin');
+    return Column( // arrange children vertically
+      mainAxisAlignment: MainAxisAlignment.center, // vertically centered
       children: <Widget>[
-        LoginScreenTopImage(),
-        Row(
+        const LoginScreenTopText(),
+        Row( // arrange children horizontally
           children: [
-            Spacer(),
-            Expanded(
-              flex: 8,
+            const Spacer(), // add flexible space (left side)
+            Expanded( // fill the remaining space
+              flex: 8, // 80% of the screen width
               child: LoginForm(isAdmin: isAdmin),
             ),
-            Spacer(),
+            const Spacer(), // add flexible space (right side)
           ],
          ),
         Padding(
-          padding: const EdgeInsets.only(top: 20.0), // Add padding top
+          padding: const EdgeInsets.only(top: 20.0), // Add only top padding
+          // navigate to admin login screen when clicked on the text
           child: GestureDetector(
-            onTap: () {
+            onTap: () { // specify action taken when the text is tapped
               Navigator.push(
                 context,
-                MaterialPageRoute(builder: (context) => AdminLogin()),
+                MaterialPageRoute(builder: (context) => const AdminLogin()),
               );
             },
-            child: Text(
+            child: const Text(
               "Login As Admin",
               style: TextStyle(color: kPrimaryColor),
             ),
@@ -79,31 +80,31 @@ class DesktopLoginScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    print('isAdmin in DesktopLoginScreen: $isAdmin');
-    return Row(
-      mainAxisAlignment: MainAxisAlignment.end,
+    //print('isAdmin in DesktopLoginScreen: $isAdmin');
+    return Row( // arrange children horizontally
+      mainAxisAlignment: MainAxisAlignment.end, // align children to the right
       children: [
-        Expanded(
-          child: LoginScreenTopImage(),
+        const Expanded(
+          child: LoginScreenTopText(),
         ),
         Expanded(
-          child: Column(
+          child: Column( // arrange children vertically
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               SizedBox(
-                width: 450,
+                width: 450, // set the width of the login form
                 child: LoginForm(isAdmin: isAdmin),
               ),
               Padding(
-                padding: const EdgeInsets.only(top: 20.0), // Add padding top
+                padding: const EdgeInsets.only(top: 20.0), // Add only top padding
                 child: GestureDetector(
                   onTap: () {
                     Navigator.push(
                       context,
-                      MaterialPageRoute(builder: (context) => AdminLogin()),
+                      MaterialPageRoute(builder: (context) => const AdminLogin()),
                     );
                   },
-                  child: Text(
+                  child: const Text(
                     "Login As Admin",
                     style: TextStyle(color: kPrimaryColor),
                   ),
@@ -117,9 +118,9 @@ class DesktopLoginScreen extends StatelessWidget {
   }
 }
 
-
-class LoginScreenTopImage extends StatelessWidget {
-  const LoginScreenTopImage({
+// Top text of the login screen
+class LoginScreenTopText extends StatelessWidget {
+  const LoginScreenTopText({
     Key? key,
   }) : super(key: key);
 
