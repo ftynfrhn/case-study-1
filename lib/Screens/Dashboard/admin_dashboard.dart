@@ -58,7 +58,7 @@ class _AdminDashboardState extends State<AdminDashboard> {
             const Padding(
               padding: EdgeInsets.all(8.0),
               child: Text(
-                'Select a user:',
+                'Select a User:',
                 style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
               ),
             ),
