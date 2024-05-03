@@ -1,27 +1,24 @@
-import 'package:case_study1/Screens/Login/user_login.dart';
 import 'package:flutter/material.dart';
 import '../../Responsive.dart';
 import '../../Component/background.dart';
 import '../../../constants.dart';
-import '../../Responsive.dart';
 import 'login_form.dart';
+import 'user_login.dart'; // Import the AdminDashboard page
 
-// set admin login screen layout & provide navigation to admin login screen
 class AdminLogin extends StatelessWidget {
   const AdminLogin({super.key});
 
   @override
   Widget build(BuildContext context) {
-    bool isAdmin = false;
-    //print('isAdmin in UserLogin: $isAdmin');
+    bool isAdmin = true; // Set isAdmin to true for admin login
     return Background(
-      child: SingleChildScrollView( // ensures contain scrollable
+      child: SingleChildScrollView(
         child: SafeArea(
           child: Responsive(
-          mobile: MobileLoginScreen(isAdmin: isAdmin),
-          desktop: DesktopLoginScreen(isAdmin: isAdmin),
+            mobile: MobileLoginScreen(isAdmin: isAdmin),
+            desktop: DesktopLoginScreen(isAdmin: isAdmin),
+          ),
         ),
-        )
       ),
     );
   }
@@ -36,29 +33,28 @@ class MobileLoginScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    //print('isAdmin in MobileLoginScreen: $isAdmin');
-    return Column( // arrange children vertically
-      mainAxisAlignment: MainAxisAlignment.center, // vertically centered
+    return Column(
+      mainAxisAlignment: MainAxisAlignment.center,
       children: <Widget>[
         const LoginScreenTopText(),
-        Row( // arrange children horizontally
+        Row(
           children: [
-            const Spacer(), // add flexible space (left side)
-            Expanded( // fill the remaining space
-              flex: 8, // 80% of the screen width
+            const Spacer(),
+            Expanded(
+              flex: 8,
               child: LoginForm(isAdmin: isAdmin),
             ),
-            const Spacer(), // add flexible space (right side)
+            const Spacer(),
           ],
-         ),
+        ),
         Padding(
-          padding: const EdgeInsets.only(top: 20.0), // Add only top padding
-          // navigate to admin login screen when clicked on the text
+          padding: const EdgeInsets.only(top: 10.0),
           child: GestureDetector(
-            onTap: () { // specify action taken when the text is tapped
+            onTap: () {
+              // Navigate to the UserLogin page when "Login As User" button is tapped
               Navigator.push(
                 context,
-                MaterialPageRoute(builder: (context) => const AdminLogin()),
+                MaterialPageRoute(builder: (context) => const UserLogin()),
               );
             },
             child: const Text(
@@ -81,25 +77,25 @@ class DesktopLoginScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    //print('isAdmin in DesktopLoginScreen: $isAdmin');
-    return Row( // arrange children horizontally
-      mainAxisAlignment: MainAxisAlignment.end, // align children to the right
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.end,
       children: [
         const Expanded(
           child: LoginScreenTopText(),
         ),
         Expanded(
-          child: Column( // arrange children vertically
+          child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               SizedBox(
-                width: 450, // set the width of the login form
+                width: 450,
                 child: LoginForm(isAdmin: isAdmin),
               ),
               Padding(
-                padding: const EdgeInsets.only(top: 20.0), // Add only top padding
+                padding: const EdgeInsets.only(top: 10.0),
                 child: GestureDetector(
                   onTap: () {
+                    // Navigate to the UserLogin page when "Login As User" button is tapped
                     Navigator.push(
                       context,
                       MaterialPageRoute(builder: (context) => const UserLogin()),
@@ -119,11 +115,10 @@ class DesktopLoginScreen extends StatelessWidget {
   }
 }
 
-// Top text of the login screen
 class LoginScreenTopText extends StatelessWidget {
   const LoginScreenTopText({
-    Key? key,
-  }) : super(key: key);
+    super.key,
+  });
 
   @override
   Widget build(BuildContext context) {
