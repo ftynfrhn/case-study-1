@@ -1,14 +1,16 @@
 import 'package:flutter/material.dart';
 
 class Course {
+  final String courseCode;
   final String courseName;
-  final String timing;
+  final String time;
   final String date;
   final String lecturerName;
 
   Course({
+    required this.courseCode,
     required this.courseName,
-    required this.timing,
+    required this.time,
     required this.date,
     required this.lecturerName,
   });
@@ -17,74 +19,86 @@ class Course {
 class CourseSchedulePage extends StatelessWidget {
   final List<Course> courses = [
     Course(
+      courseCode: 'CSCI 4340',
       courseName: 'Machine Learning',
-      timing: '8:30 AM - 9:50 AM',
+      time: '08:30 AM - 09:50 AM',
       date: 'Monday''Wednesday',
       lecturerName: 'Norlina Hamza',
     ),
     Course(
+      courseCode: 'CSCI 4340',
       courseName: 'Machine Learning',
-      timing: '2:00 PM - 3:20 PM',
+      time: '02:00 PM - 03:20 PM',
       date: 'Tuesday''Thursday',
       lecturerName: 'Norlina Hamza',
     ),
     Course(
+      courseCode: 'CSCI 4340',
       courseName: 'Machine Learning',
-      timing: '11:30 AM - 12:50 PM',
+      time: '11:30 AM - 12:50 PM',
       date: 'Monday''Wednesday',
       lecturerName: 'Norlina Hamza',
     ),
     Course(
+      courseCode: 'CSCI 4341',
       courseName: 'Big Data Analytics',
-      timing: '10:00 AM - 11:20 PM',
+      time: '10:00 AM - 11:20 AM',
       date: 'Monday''Wednesday',
       lecturerName: 'Razeen Ansari',
     ),
     Course(
+      courseCode: 'CSCI 4342',
       courseName: 'Natural Language Processing',
-      timing: '3:30 PM - 4:50 PM',
+      time: '3:30 PM - 4:50 PM',
       date: 'Monday''Wednesday',
       lecturerName: 'Alex Johnson',
     ),
     Course(
-      courseName: 'Data Science',
-      timing: '10:00 AM - 11:20 AM',
-      date: 'Monday''Wednesday',
-      lecturerName: 'Emily Brown',
-    ),
-    Course(
-      courseName: 'Data Science',
-      timing: '2:00 PM - 3:20 PM',
-      date: 'Tuesday''Thursday',
-      lecturerName: 'Emily Brown',
-    ),
-    Course(
+      courseCode: 'CSCI 4342',
       courseName: 'Natural Language Processing',
-      timing: '9:00 AM - 10:20 AM',
+      time: '10:00 AM - 11:20 AM',
       date: 'Monday''Wednesday',
       lecturerName: 'John Smith',
     ),
     Course(
+      courseCode: 'CSCI 4343',
+      courseName: 'Data Science',
+      time: '10:00 AM - 11:20 AM',
+      date: 'Monday''Wednesday',
+      lecturerName: 'Emily Brown',
+    ),
+    Course(
+      courseCode: 'CSCI 4343',
+      courseName: 'Data Science',
+      time: '02:00 PM - 03:20 PM',
+      date: 'Tuesday''Thursday',
+      lecturerName: 'Emily Brown',
+    ),
+    Course(
+      courseCode: 'CSCI 4346',
       courseName: 'Bio-Inspired Computing',
-      timing: '1:00 PM - 2:20 PM',
+      time: '02:00 PM - 03:20 PM',
       date: 'Monday''Wednesday',
       lecturerName: 'Sarah Johnson',
     ),
     Course(
+      courseCode: 'CSCI 4344',
       courseName: 'Introduction to Affective Computing',
-      timing: '11:30 AM - 12:50 PM',
+      time: '11:30 AM - 12:50 PM',
       date: 'Tuesday''Thursday',
       lecturerName: 'Michael Williams',
     ),
     Course(
+      courseCode: 'INFO 2303',
       courseName: 'Database Programming',
-      timing: '4:00 PM - 5:20 PM',
+      time: '03:30 PM - 04:50 PM',
       date: 'Tuesday''Thursday',
       lecturerName: 'Emma Davis',
     ),
     Course(
+      courseCode: 'INFO 4313',
       courseName: 'Data Mining',
-      timing: '8:30 AM - 9:50 AM',
+      time: '08:30 AM - 09:50 AM',
       date: 'Tuesday''Thursday',
       lecturerName: 'David Miller',
     ),
@@ -109,6 +123,7 @@ class CourseSchedulePage extends StatelessWidget {
           child: DataTable(
             columnSpacing: 20.0,
             columns: const [
+              DataColumn(label: Text('Course Code')),
               DataColumn(label: Text('Course Name')),
               DataColumn(label: Text('Timing')),
               DataColumn(label: Text('Date')),
@@ -116,8 +131,9 @@ class CourseSchedulePage extends StatelessWidget {
             ],
             rows: courses.map((course) {
               return DataRow(cells: [
+                DataCell(Text(course.courseCode)),
                 DataCell(Text(course.courseName)),
-                DataCell(Text(course.timing)),
+                DataCell(Text(course.time)),
                 DataCell(Text(course.date)),
                 DataCell(Text(course.lecturerName)),
               ]);
