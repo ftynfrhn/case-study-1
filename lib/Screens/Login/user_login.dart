@@ -7,7 +7,7 @@ import 'admin_login.dart';
 
 // set user login screen layout & provide navigation to admin login screen
 class UserLogin extends StatelessWidget {
-  const UserLogin({Key? key}) : super(key: key);
+  const UserLogin({super.key});
 
   @override
   Widget build(BuildContext context) {
