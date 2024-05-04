@@ -1,16 +1,17 @@
+// admin_login.dart
 import 'package:flutter/material.dart';
 import '../../Responsive.dart';
 import '../../Component/background.dart';
 import '../../../constants.dart';
-import 'login_form.dart';
-import 'user_login.dart'; // Import the AdminDashboard page
+import 'adminlogin_form.dart';
+import 'user_login.dart'; // Import the new AdminLoginForm widget
 
 class AdminLogin extends StatelessWidget {
   const AdminLogin({super.key});
 
   @override
   Widget build(BuildContext context) {
-    bool isAdmin = true; // Set isAdmin to true for admin login
+    bool isAdmin = true;
     return Background(
       child: SingleChildScrollView(
         child: SafeArea(
@@ -27,9 +28,9 @@ class AdminLogin extends StatelessWidget {
 class MobileLoginScreen extends StatelessWidget {
   final bool isAdmin;
   const MobileLoginScreen({
-    Key? key,
+    super.key,
     required this.isAdmin,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -42,7 +43,7 @@ class MobileLoginScreen extends StatelessWidget {
             const Spacer(),
             Expanded(
               flex: 8,
-              child: LoginForm(isAdmin: isAdmin),
+              child: AdminLoginForm(), // Use the AdminLoginForm here
             ),
             const Spacer(),
           ],
@@ -51,7 +52,6 @@ class MobileLoginScreen extends StatelessWidget {
           padding: const EdgeInsets.only(top: 10.0),
           child: GestureDetector(
             onTap: () {
-              // Navigate to the UserLogin page when "Login As User" button is tapped
               Navigator.push(
                 context,
                 MaterialPageRoute(builder: (context) => const UserLogin()),
@@ -71,9 +71,9 @@ class MobileLoginScreen extends StatelessWidget {
 class DesktopLoginScreen extends StatelessWidget {
   final bool isAdmin;
   const DesktopLoginScreen({
-    Key? key,
+    super.key,
     required this.isAdmin,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -89,13 +89,12 @@ class DesktopLoginScreen extends StatelessWidget {
             children: [
               SizedBox(
                 width: 450,
-                child: LoginForm(isAdmin: isAdmin),
+                child: AdminLoginForm(), // Use the AdminLoginForm here
               ),
               Padding(
                 padding: const EdgeInsets.only(top: 10.0),
                 child: GestureDetector(
                   onTap: () {
-                    // Navigate to the UserLogin page when "Login As User" button is tapped
                     Navigator.push(
                       context,
                       MaterialPageRoute(builder: (context) => const UserLogin()),
