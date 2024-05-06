@@ -4,14 +4,14 @@ class Course {
   final String courseCode;
   final String courseName;
   final String time;
-  final String date;
+  final String day;
   final String lecturerName;
 
   Course({
     required this.courseCode,
     required this.courseName,
     required this.time,
-    required this.date,
+    required this.day,
     required this.lecturerName,
   });
 }
@@ -22,84 +22,84 @@ class CourseSchedulePage extends StatelessWidget {
       courseCode: 'CSCI 4340',
       courseName: 'Machine Learning',
       time: '08:30 AM - 09:50 AM',
-      date: 'Monday''Wednesday',
+      day: 'Monday-Wednesday',
       lecturerName: 'Norlina Hamza',
     ),
     Course(
       courseCode: 'CSCI 4340',
       courseName: 'Machine Learning',
       time: '02:00 PM - 03:20 PM',
-      date: 'Tuesday''Thursday',
+      day: 'Tuesday-Thursday',
       lecturerName: 'Norlina Hamza',
     ),
     Course(
-      courseCode: 'CSCI 4340',
-      courseName: 'Machine Learning',
-      time: '11:30 AM - 12:50 PM',
-      date: 'Monday''Wednesday',
-      lecturerName: 'Norlina Hamza',
+      courseCode: 'CSCI 4401',
+      courseName: 'Final Year Project I',
+      time: '10:00 AM - 11:20 AM',
+      day: 'Friday',
+      lecturerName: 'Nurul Hidayah',
     ),
     Course(
       courseCode: 'CSCI 4341',
       courseName: 'Big Data Analytics',
       time: '10:00 AM - 11:20 AM',
-      date: 'Monday''Wednesday',
+      day: 'Monday-Wednesday',
       lecturerName: 'Razeen Ansari',
     ),
     Course(
       courseCode: 'CSCI 4342',
       courseName: 'Natural Language Processing',
-      time: '3:30 PM - 4:50 PM',
-      date: 'Monday''Wednesday',
+      time: '03:30 PM - 04:50 PM',
+      day: 'Monday-Wednesday',
       lecturerName: 'Alex Johnson',
     ),
     Course(
       courseCode: 'CSCI 4342',
       courseName: 'Natural Language Processing',
       time: '10:00 AM - 11:20 AM',
-      date: 'Monday''Wednesday',
+      day: 'Monday-Wednesday',
       lecturerName: 'John Smith',
     ),
     Course(
       courseCode: 'CSCI 4343',
       courseName: 'Data Science',
       time: '10:00 AM - 11:20 AM',
-      date: 'Monday''Wednesday',
+      day: 'Monday-Wednesday',
       lecturerName: 'Emily Brown',
     ),
     Course(
       courseCode: 'CSCI 4343',
       courseName: 'Data Science',
       time: '02:00 PM - 03:20 PM',
-      date: 'Tuesday''Thursday',
+      day: 'Tuesday-Thursday',
       lecturerName: 'Emily Brown',
     ),
     Course(
       courseCode: 'CSCI 4346',
       courseName: 'Bio-Inspired Computing',
       time: '02:00 PM - 03:20 PM',
-      date: 'Monday''Wednesday',
+      day: 'Monday-Wednesday',
       lecturerName: 'Sarah Johnson',
     ),
     Course(
       courseCode: 'CSCI 4344',
       courseName: 'Introduction to Affective Computing',
       time: '11:30 AM - 12:50 PM',
-      date: 'Tuesday''Thursday',
+      day: 'Tuesday-Thursday',
       lecturerName: 'Michael Williams',
     ),
     Course(
       courseCode: 'INFO 2303',
       courseName: 'Database Programming',
       time: '03:30 PM - 04:50 PM',
-      date: 'Tuesday''Thursday',
+      day: 'Tuesday-Thursday',
       lecturerName: 'Emma Davis',
     ),
     Course(
       courseCode: 'INFO 4313',
       courseName: 'Data Mining',
       time: '08:30 AM - 09:50 AM',
-      date: 'Tuesday''Thursday',
+      day: 'Tuesday-Thursday',
       lecturerName: 'David Miller',
     ),
   ];
@@ -134,7 +134,7 @@ class CourseSchedulePage extends StatelessWidget {
                 DataCell(Text(course.courseCode)),
                 DataCell(Text(course.courseName)),
                 DataCell(Text(course.time)),
-                DataCell(Text(course.date)),
+                DataCell(Text(course.day)),
                 DataCell(Text(course.lecturerName)),
               ]);
             }).toList(),
