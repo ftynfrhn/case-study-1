@@ -1,69 +1,291 @@
 import 'package:flutter/material.dart';
-import 'course_schedule_page.dart'; 
+import 'package:flutter/services.dart';
+import 'package:syncfusion_flutter_datagrid/datagrid.dart';
+import 'package:collection/collection.dart';
+import 'course_schedule_page.dart';
 
-class UserDashboard extends StatelessWidget {
-  const UserDashboard({super.key, Key});
-
+class UserDashboard extends StatefulWidget {
   @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: const Text('User Dashboard'),
-      ),
-      body: Column(
-        children: [
-          const Text(
-            'Class Timetable',
-            style: TextStyle(
-              fontSize: 20,
-              fontWeight: FontWeight.bold,
-            ),
-          ),
-          const SizedBox(height: 10),
-          Expanded(
-            child: ListView.builder(
-              itemCount: 5, // Number of days (Monday to Friday)
-              itemBuilder: (context, index) {
-                return ListTile(
-                  title: Text('Day ${index + 1}'),
-                  subtitle: const Column(
-                    children: [
-                      TimeSlotTile(time: '8:30 AM - 9:50 AM'),
-                      TimeSlotTile(time: '10:00 AM - 11:20 AM'),
-                      TimeSlotTile(time: '11:30 AM - 12:50 PM'),
-                      TimeSlotTile(time: '2:00 PM - 3:20 PM'),
-                      TimeSlotTile(time: '3:30 PM - 4:50 PM'),
+  _UserDashboardState createState() => _UserDashboardState();
+}
+
+class _UserDashboardState extends State<UserDashboard> {
+   late CourseDataSource _courseDataSource;
+   List<Courses> _courses = <Courses>[];
+   late DataGridController _dataGridController;
+
+   @override
+    void initState() {
+      super.initState();
+      _courses = getCoursesData();
+      _courseDataSource = CourseDataSource(_courses);
+      _dataGridController = DataGridController();
+    }
+
+    @override
+    Widget build(BuildContext context) {
+      return Scaffold(
+        appBar: AppBar(
+          title: const Text('Course Schedule'),
+        ),
+        body: SafeArea(
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              SizedBox(height: 20), // Add space between AppBar and SfDataGrid
+              Expanded(
+                child: Padding(
+                  padding: EdgeInsets.symmetric(horizontal: 40.0),
+                  child: SfDataGrid(
+                    source: _courseDataSource,
+                    allowEditing: true,
+                    selectionMode: SelectionMode.single,
+                    navigationMode: GridNavigationMode.cell,
+                    columnWidthMode: ColumnWidthMode.fill,
+                    controller: _dataGridController,
+                    columns: <GridColumn>[
+                      GridColumn(
+                        columnName: 'day', 
+                        label: Container(
+                          padding: const EdgeInsets.symmetric(horizontal: 16.0),
+                          alignment: Alignment.center,
+                          child: const Text(
+                            'Time|Day',
+                            overflow: TextOverflow.ellipsis,
+                          ),
+                        ),
+                      ),
+                      GridColumn(
+                        columnName: 'mon',
+                        label: Container(
+                          padding: const EdgeInsets.symmetric(horizontal: 16.0),
+                          alignment: Alignment.center,
+                          child: const Text(
+                            'Monday',
+                            overflow: TextOverflow.ellipsis,
+                          ),
+                        ),
+                      ),
+                      GridColumn(
+                        columnName: 'tue',
+                        label: Container(
+                          padding: const EdgeInsets.symmetric(horizontal: 16.0),
+                          alignment: Alignment.center,
+                          child: const Text(
+                            'Tuesday',
+                            overflow: TextOverflow.ellipsis,
+                          ),
+                        ),
+                      ),
+                      GridColumn(
+                        columnName: 'wed',
+                        label: Container(
+                          padding: const EdgeInsets.symmetric(horizontal: 16.0),
+                          alignment: Alignment.center,
+                          child: const Text(
+                            'Wednesday',
+                            overflow: TextOverflow.ellipsis,
+                          ),
+                        ),
+                      ),
+                      GridColumn(
+                        columnName: 'thu',
+                        label: Container(
+                          padding: const EdgeInsets.symmetric(horizontal: 16.0),
+                          alignment: Alignment.center,
+                          child: const Text(
+                            'Thursday',
+                            overflow: TextOverflow.ellipsis,
+                          ),
+                        ),
+                      ),
+                      GridColumn(
+                        columnName: 'fri',
+                        label: Container(
+                          padding: const EdgeInsets.symmetric(horizontal: 16.0),
+                          alignment: Alignment.center,
+                          child: const Text(
+                            'Friday',
+                            overflow: TextOverflow.ellipsis,
+                          ),
+                        ),
+                      ),
                     ],
+                    gridLinesVisibility: GridLinesVisibility.both,
+                    headerGridLinesVisibility: GridLinesVisibility.both,
                   ),
-                );
-              },
-            ),
+                ),
+              ),
+            ],
           ),
-        ],
-      ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: () {
-          // Navigate to the CourseSchedulePage when the FAB is pressed
-          Navigator.push(
-            context,
-            MaterialPageRoute(builder: (context) => CourseSchedulePage()),
-          );
-        },
-        child: const Icon(Icons.calendar_today),
-      ),
-    );
+        ),
+        floatingActionButton: FloatingActionButton(
+          onPressed: () {
+            Navigator.push(
+              context,
+              MaterialPageRoute(builder: (context) => CourseSchedulePage()),
+            );
+          },
+          child: const Icon(Icons.calendar_today),
+        ),
+      );
+    }
+
+  List<Courses> getCoursesData() {
+    return [
+      Courses('08:30 AM - 09:50 AM', '', '', '', '', ''),
+      Courses('10:00 AM - 11:20 AM', '', '', '', '', 'CSCI 4401'),
+      Courses('11:30 AM - 12:50 PM', '', '', '', '', ''),
+      Courses('02:00 PM - 03:20 PM', '', '', '', '', ''),
+      Courses('03:30 PM - 04:50 PM', '', '', '', '', '')
+    ];
   }
 }
 
-class TimeSlotTile extends StatelessWidget {
-  final String time;
+class Courses {
+  Courses(this.time, this.mon, this.tue, this.wed, this.thu, this.fri);
 
-  const TimeSlotTile({super.key, required this.time});
+  final String time;
+  String mon;
+  String tue;
+  String wed;
+  String thu;
+  String fri;
+
+  DataGridRow getDataGridRow() {
+    return DataGridRow(cells: <DataGridCell>[
+      DataGridCell<String>(columnName: 'time', value: time),
+      DataGridCell<String>(columnName: 'mon', value: mon),
+      DataGridCell<String>(columnName: 'tue', value: tue),
+      DataGridCell<String>(columnName: 'wed', value: wed),
+      DataGridCell<String>(columnName: 'thu', value: thu),
+      DataGridCell<String>(columnName: 'fri', value: fri),
+    ]);
+  }
+}
+
+class CourseDataSource extends DataGridSource {
+  CourseDataSource(this._courses) {
+    dataGridRows = _courses
+    .map<DataGridRow>((dataGridRow) => dataGridRow.getDataGridRow())
+    .toList();
+  }
+
+  List<Courses> _courses = [];
+  List<DataGridRow> dataGridRows = [];
+
+  String? newCellValue;
+
+  TextEditingController editingController = TextEditingController();
 
   @override
-  Widget build(BuildContext context) {
-    return ListTile(
-      title: Text(time),
+  List<DataGridRow> get rows => dataGridRows;
+
+  @override
+  DataGridRowAdapter? buildRow(DataGridRow row) {
+    return DataGridRowAdapter(
+      cells: row.getCells().map<Widget>((dataGridCell) {
+        return Container(
+          alignment: Alignment.center,
+          padding: const EdgeInsets.symmetric(horizontal: 16.0),
+          child: Text(
+            dataGridCell.value.toString(),
+            overflow: TextOverflow.ellipsis,
+        ));
+      }).toList());
+  }
+
+@override
+Future<void> onCellSubmit(
+    DataGridRow dataGridRow, RowColumnIndex rowColumnIndex, GridColumn column) async {
+  final dynamic oldValue = dataGridRow
+          .getCells()
+          .firstWhere((DataGridCell dataGridCell) =>
+              dataGridCell.columnName == column.columnName)
+          .value ??
+      '';
+
+  final int dataRowIndex = dataGridRows.indexOf(dataGridRow);
+
+  if (newCellValue == null || oldValue == newCellValue) {
+    return;
+  }
+
+  if (column.columnName == 'mon') {
+    dataGridRows[dataRowIndex].getCells()[rowColumnIndex.columnIndex] =
+        DataGridCell<String>(columnName: 'mon', value: newCellValue!);
+    _courses[dataRowIndex].mon = newCellValue.toString();
+  } else if (column.columnName == 'tue') {
+    dataGridRows[dataRowIndex].getCells()[rowColumnIndex.columnIndex] =
+        DataGridCell<String>(columnName: 'tue', value: newCellValue!);
+    _courses[dataRowIndex].tue = newCellValue.toString();
+  } else if (column.columnName == 'wed') {
+    dataGridRows[dataRowIndex].getCells()[rowColumnIndex.columnIndex] =
+        DataGridCell<String>(columnName: 'wed', value: newCellValue!);
+    _courses[dataRowIndex].wed = newCellValue.toString();
+  } else if (column.columnName == 'thu') {
+    dataGridRows[dataRowIndex].getCells()[rowColumnIndex.columnIndex] =
+        DataGridCell<String>(columnName: 'thu', value: newCellValue!);
+    _courses[dataRowIndex].thu = newCellValue.toString();
+  } else {
+    dataGridRows[dataRowIndex].getCells()[rowColumnIndex.columnIndex] =
+        DataGridCell<String>(columnName: 'fri', value: newCellValue!);
+    _courses[dataRowIndex].fri = newCellValue.toString();
+  }
+}
+
+
+  @override
+  Future<bool> canSubmitCell(DataGridRow dataGridRow, RowColumnIndex rowColumnIndex, GridColumn column) {
+    return Future.value(true);
+  }
+
+  @override
+  Widget? buildEditWidget(DataGridRow dataGridRow, RowColumnIndex rowColumnIndex, GridColumn column, CellSubmit submitCell) {
+    
+    final String displayText = dataGridRow
+            .getCells()
+            .firstWhereOrNull((DataGridCell dataGridCell) => 
+                dataGridCell.columnName == column.columnName)
+        ?.value 
+        ?.toString() ??
+        '';
+
+    newCellValue = null;
+
+    final RegExp regExp = _getRegExp(column.columnName);
+
+    return Container(
+      padding: const EdgeInsets.all(8.0),
+      alignment: Alignment.center,
+      child: TextField(
+        autofocus: true,
+        controller: editingController..text = displayText,
+        textAlign: TextAlign.center,
+        autocorrect: false,
+        decoration: const InputDecoration(
+          contentPadding: EdgeInsets.fromLTRB(0, 0, 0, 16.0),
+        ),
+        inputFormatters: <TextInputFormatter>[
+          LengthLimitingTextInputFormatter(9),
+          FilteringTextInputFormatter.allow(regExp)
+        ],
+        keyboardType: TextInputType.text,
+        onChanged: (String value) {
+          if (value.isNotEmpty) {
+            newCellValue = value;
+          } else {
+            newCellValue = null;
+          }
+        },
+        onSubmitted: (String value) {
+          submitCell();
+        },
+      ),
     );
+  }
+
+  RegExp _getRegExp(String columnName) {
+    return RegExp(r'[A-Z0-9\s]');
   }
 }
