@@ -1,3 +1,5 @@
+// NUR FATIN FARHANA BINTI HAMDAN (2014226)
+
 import 'package:flutter/material.dart';
 
 // convenient way to create a background for the app 

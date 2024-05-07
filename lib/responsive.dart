@@ -1,3 +1,5 @@
+// NUR FATIN FARHANA BINTI HAMDAN (2014226)
+
 import 'package:flutter/material.dart';
 
 // Adapt the UI to different screen sizes

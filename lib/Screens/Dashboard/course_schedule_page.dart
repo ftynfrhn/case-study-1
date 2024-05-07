@@ -1,3 +1,5 @@
+// BALQIS HAIFA BINTI M.NASER (2026210)
+
 import 'package:flutter/material.dart';
 
 // Define the Course class to represent course information

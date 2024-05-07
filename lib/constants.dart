@@ -1,3 +1,5 @@
+// NUR FATIN FARHANA BINTI HAMDAN (2014226)
+
 import 'package:flutter/material.dart';
 
 // define a set of constants that will be used throughout the app
