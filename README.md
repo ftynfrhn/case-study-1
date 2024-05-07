@@ -39,14 +39,14 @@
 
 1. Syncfusion Flutter DataGrid:
      - Link: https://www.syncfusion.com/flutter-widgets/flutter-datagrid
-2. Building a responsive login page in Flutter
+2. Building a responsive login page in Flutter:
      - Link: https://blog.logrocket.com/building-responsive-login-page-flutter/
-3. Flutter’s DataTable widget: A guide to displaying data
+3. Flutter’s DataTable widget: A guide to displaying data:
      - Link: https://blog.logrocket.com/flutter-datatable-widget-guide-displaying-data/
 4. Github:
      - Link: https://github.com/abuanwar072/Welcome-Login-Signup-Page-Flutter.git
-5. Building a web application with Flutter
+5. Building a web application with Flutter:
      - Link: https://docs.flutter.dev/platform-integration/web/building
-6. Introduction to Git in VS Code
+6. Introduction to Git in VS Code:
      - Link: https://code.visualstudio.com/docs/sourcecontrol/intro-to-git#:~:text=Pick%20an%20existing%20or%20new,to%20start%20tracking%20code%20changes
      
