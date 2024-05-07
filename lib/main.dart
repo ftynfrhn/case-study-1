@@ -27,7 +27,10 @@ class MyApp extends StatelessWidget {
             maximumSize: const Size(double.infinity, 56), // button width and height
             minimumSize: const Size(double.infinity, 56), // double.infinity - the button takes the full width of the screen
           ),  
-        ) 
+        ),
+        floatingActionButtonTheme: const FloatingActionButtonThemeData(
+        backgroundColor: kPrimaryLightColor, // Use the kPrimaryLightColor for the floating action button
+        ), 
       ),
       home: const UserLogin(), // set the home screen
     );

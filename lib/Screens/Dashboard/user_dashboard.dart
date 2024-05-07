@@ -3,7 +3,9 @@ import 'package:flutter/services.dart';
 import 'package:syncfusion_flutter_datagrid/datagrid.dart';
 import 'package:collection/collection.dart';
 import 'course_schedule_page.dart';
+import '../../Component/background.dart';
 
+// Stateful widget for the user dashboard
 class UserDashboard extends StatefulWidget {
   @override
   _UserDashboardState createState() => _UserDashboardState();
@@ -11,11 +13,13 @@ class UserDashboard extends StatefulWidget {
 
 class _UserDashboardState extends State<UserDashboard> {
    late CourseDataSource _courseDataSource;
+   // List of courses displayed in the data grid
    List<Courses> _courses = <Courses>[];
    late DataGridController _dataGridController;
 
    @override
     void initState() {
+      // Initialize state variable and data source
       super.initState();
       _courses = getCoursesData();
       _courseDataSource = CourseDataSource(_courses);
@@ -24,109 +28,117 @@ class _UserDashboardState extends State<UserDashboard> {
 
     @override
     Widget build(BuildContext context) {
-      return Scaffold(
-        appBar: AppBar(
-          title: const Text('Course Schedule'),
-        ),
-        body: SafeArea(
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              SizedBox(height: 20), // Add space between AppBar and SfDataGrid
-              Expanded(
-                child: Padding(
-                  padding: EdgeInsets.symmetric(horizontal: 40.0),
-                  child: SfDataGrid(
-                    source: _courseDataSource,
-                    allowEditing: true,
-                    selectionMode: SelectionMode.single,
-                    navigationMode: GridNavigationMode.cell,
-                    columnWidthMode: ColumnWidthMode.fill,
-                    controller: _dataGridController,
-                    columns: <GridColumn>[
-                      GridColumn(
-                        columnName: 'day', 
-                        label: Container(
-                          padding: const EdgeInsets.symmetric(horizontal: 16.0),
-                          alignment: Alignment.center,
-                          child: const Text(
-                            'Time|Day',
-                            overflow: TextOverflow.ellipsis,
+      return Background( 
+        // Background widget for the entire user dashboard
+        child: Scaffold(
+          // Scaffold for the user interface
+          appBar: AppBar(
+            title: const Text('Course Schedule'),
+          ),
+          // Scaffold body
+          body: SafeArea(
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                const SizedBox(height: 50), // Add space between AppBar and SfDataGrid
+                Expanded( // Expand to occupy the remaining vertical space
+                  child: Padding(
+                    // Padding around the SfDataGrid
+                    padding: const EdgeInsets.symmetric(horizontal: 40.0),
+                    child: SfDataGrid(
+                      // SfDataGrid widget to display the course schedule
+                      source: _courseDataSource,
+                      allowEditing: true,
+                      selectionMode: SelectionMode.single,
+                      navigationMode: GridNavigationMode.cell,
+                      columnWidthMode: ColumnWidthMode.fill,
+                      controller: _dataGridController,
+                      columns: <GridColumn>[
+                        GridColumn(
+                          columnName: 'day', 
+                          label: Container(
+                            padding: const EdgeInsets.symmetric(horizontal: 16.0),
+                            alignment: Alignment.center,
+                            child: const Text(
+                              'Time|Day',
+                              overflow: TextOverflow.ellipsis,
+                            ),
                           ),
                         ),
-                      ),
-                      GridColumn(
-                        columnName: 'mon',
-                        label: Container(
-                          padding: const EdgeInsets.symmetric(horizontal: 16.0),
-                          alignment: Alignment.center,
-                          child: const Text(
-                            'Monday',
-                            overflow: TextOverflow.ellipsis,
+                        GridColumn(
+                          columnName: 'mon',
+                          label: Container(
+                            padding: const EdgeInsets.symmetric(horizontal: 16.0),
+                            alignment: Alignment.center,
+                            child: const Text(
+                              'Monday',
+                              overflow: TextOverflow.ellipsis,
+                            ),
                           ),
                         ),
-                      ),
-                      GridColumn(
-                        columnName: 'tue',
-                        label: Container(
-                          padding: const EdgeInsets.symmetric(horizontal: 16.0),
-                          alignment: Alignment.center,
-                          child: const Text(
-                            'Tuesday',
-                            overflow: TextOverflow.ellipsis,
+                        GridColumn(
+                          columnName: 'tue',
+                          label: Container(
+                            padding: const EdgeInsets.symmetric(horizontal: 16.0),
+                            alignment: Alignment.center,
+                            child: const Text(
+                              'Tuesday',
+                              overflow: TextOverflow.ellipsis,
+                            ),
                           ),
                         ),
-                      ),
-                      GridColumn(
-                        columnName: 'wed',
-                        label: Container(
-                          padding: const EdgeInsets.symmetric(horizontal: 16.0),
-                          alignment: Alignment.center,
-                          child: const Text(
-                            'Wednesday',
-                            overflow: TextOverflow.ellipsis,
+                        GridColumn(
+                          columnName: 'wed',
+                          label: Container(
+                            padding: const EdgeInsets.symmetric(horizontal: 16.0),
+                            alignment: Alignment.center,
+                            child: const Text(
+                              'Wednesday',
+                              overflow: TextOverflow.ellipsis,
+                            ),
                           ),
                         ),
-                      ),
-                      GridColumn(
-                        columnName: 'thu',
-                        label: Container(
-                          padding: const EdgeInsets.symmetric(horizontal: 16.0),
-                          alignment: Alignment.center,
-                          child: const Text(
-                            'Thursday',
-                            overflow: TextOverflow.ellipsis,
+                        GridColumn(
+                          columnName: 'thu',
+                          label: Container(
+                            padding: const EdgeInsets.symmetric(horizontal: 16.0),
+                            alignment: Alignment.center,
+                            child: const Text(
+                              'Thursday',
+                              overflow: TextOverflow.ellipsis,
+                            ),
                           ),
                         ),
-                      ),
-                      GridColumn(
-                        columnName: 'fri',
-                        label: Container(
-                          padding: const EdgeInsets.symmetric(horizontal: 16.0),
-                          alignment: Alignment.center,
-                          child: const Text(
-                            'Friday',
-                            overflow: TextOverflow.ellipsis,
+                        GridColumn(
+                          columnName: 'fri',
+                          label: Container(
+                            padding: const EdgeInsets.symmetric(horizontal: 16.0),
+                            alignment: Alignment.center,
+                            child: const Text(
+                              'Friday',
+                              overflow: TextOverflow.ellipsis,
+                            ),
                           ),
                         ),
-                      ),
-                    ],
-                    gridLinesVisibility: GridLinesVisibility.both,
-                    headerGridLinesVisibility: GridLinesVisibility.both,
+                      ],
+                      gridLinesVisibility: GridLinesVisibility.both,
+                      headerGridLinesVisibility: GridLinesVisibility.both,
+                    ),
                   ),
                 ),
-              ),
-            ],
+              ],
+            ),
           ),
-        ),
-        floatingActionButton: FloatingActionButton(
-          onPressed: () {
-            Navigator.push(
-              context,
-              MaterialPageRoute(builder: (context) => CourseSchedulePage()),
-            );
-          },
-          child: const Icon(Icons.info),
+          // Floating action button to navigate to the course schedule info page
+          floatingActionButton: FloatingActionButton(
+            onPressed: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => CourseSchedulePage()),
+              );
+            },
+            child: const Icon(Icons.info),
+          ),
         ),
       );
     }
@@ -195,6 +207,7 @@ class CourseDataSource extends DataGridSource {
       }).toList());
   }
 
+// Handle cell submissions and update data source accordingly
 @override
 Future<void> onCellSubmit(
     DataGridRow dataGridRow, RowColumnIndex rowColumnIndex, GridColumn column) async {

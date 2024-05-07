@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import '../../Responsive.dart';
 import '../../Component/background.dart';
 import '../../../constants.dart';
-import 'userlogin_form.dart';
+import 'user_login_form.dart';
 import 'admin_login.dart';
 
 // set user login screen layout & provide navigation to admin login screen
@@ -11,14 +11,12 @@ class UserLogin extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    bool isAdmin = false;
-    //print('isAdmin in UserLogin: $isAdmin');
-    return Background(
+    return const Background(
       child: SingleChildScrollView( // ensures contain scrollable
         child: SafeArea(
           child: Responsive(
-          mobile: MobileLoginScreen(isAdmin: isAdmin),
-          desktop: DesktopLoginScreen(isAdmin: isAdmin),
+          mobile: MobileLoginScreen(),
+          desktop: DesktopLoginScreen(),
         ),
         )
       ),
@@ -27,15 +25,13 @@ class UserLogin extends StatelessWidget {
 }
 
 class MobileLoginScreen extends StatelessWidget {
-  final bool isAdmin;
+
   const MobileLoginScreen({
     Key? key,
-    required this.isAdmin,
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    //print('isAdmin in MobileLoginScreen: $isAdmin');
     return Column( // arrange children vertically
       mainAxisAlignment: MainAxisAlignment.center, // vertically centered
       children: <Widget>[
@@ -45,7 +41,7 @@ class MobileLoginScreen extends StatelessWidget {
             const Spacer(), // add flexible space (left side)
             Expanded( // fill the remaining space
               flex: 8, // 80% of the screen width
-              child: LoginForm(isAdmin: isAdmin),
+              child: LoginForm(),
             ),
             const Spacer(), // add flexible space (right side)
           ],
@@ -54,12 +50,7 @@ class MobileLoginScreen extends StatelessWidget {
           padding: const EdgeInsets.only(top: 20.0), // Add only top padding
           // navigate to admin login screen when clicked on the text
           child: GestureDetector(
-            onTap: () { // specify action taken when the text is tapped
-              Navigator.push(
-                context,
-                MaterialPageRoute(builder: (context) => const AdminLogin()),
-              );
-            },
+            onTap: () => _navigateToAdminLogin(context),
             child: const Text(
               "Login As Admin",
               style: TextStyle(color: kPrimaryColor),
@@ -72,15 +63,13 @@ class MobileLoginScreen extends StatelessWidget {
 }
 
 class DesktopLoginScreen extends StatelessWidget {
-  final bool isAdmin;
+  
   const DesktopLoginScreen({
     Key? key,
-    required this.isAdmin,
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    //print('isAdmin in DesktopLoginScreen: $isAdmin');
     return Row( // arrange children horizontally
       mainAxisAlignment: MainAxisAlignment.end, // align children to the right
       children: [
@@ -93,17 +82,12 @@ class DesktopLoginScreen extends StatelessWidget {
             children: [
               SizedBox(
                 width: 450, // set the width of the login form
-                child: LoginForm(isAdmin: isAdmin),
+                child: LoginForm(),
               ),
               Padding(
                 padding: const EdgeInsets.only(top: 20.0), // Add only top padding
                 child: GestureDetector(
-                  onTap: () {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(builder: (context) => const AdminLogin()),
-                    );
-                  },
+                  onTap: () => _navigateToAdminLogin(context), 
                   child: const Text(
                     "Login As Admin",
                     style: TextStyle(color: kPrimaryColor),
@@ -116,6 +100,14 @@ class DesktopLoginScreen extends StatelessWidget {
       ],
     );
   }
+}
+
+// function for navigating to the admin login screen
+void _navigateToAdminLogin(BuildContext context) {
+  Navigator.push(
+    context,
+    MaterialPageRoute(builder: (context) => const AdminLogin()),
+  );
 }
 
 // Top text of the login screen

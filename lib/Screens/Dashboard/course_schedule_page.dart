@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+// Define the Course class to represent course information
 class Course {
   final String courseCode;
   final String courseName;
@@ -16,7 +17,9 @@ class Course {
   });
 }
 
+// Define the CourseSchedulePage widget
 class CourseSchedulePage extends StatelessWidget {
+  // List of courses
   final List<Course> courses = [
     Course(
       courseCode: 'CSCI 4340',
@@ -36,6 +39,13 @@ class CourseSchedulePage extends StatelessWidget {
       courseCode: 'CSCI 4401',
       courseName: 'Final Year Project I',
       time: '10:00 AM - 11:20 AM',
+      day: 'Friday',
+      lecturerName: 'Nurul Hidayah',
+    ),
+    Course(
+      courseCode: 'CSCI 4402',
+      courseName: 'Final Year Project II',
+      time: '11:30 AM - 12:50 PM',
       day: 'Friday',
       lecturerName: 'Nurul Hidayah',
     ),
@@ -107,11 +117,11 @@ class CourseSchedulePage extends StatelessWidget {
 
   CourseSchedulePage({super.key});
 
-  @override
+   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Course Schedule'),
+        title: const Text('Course Schedule List'),
       ),
       body: Center(
         child: Container(
@@ -120,24 +130,26 @@ class CourseSchedulePage extends StatelessWidget {
             border: Border.all(),
             borderRadius: BorderRadius.circular(10.0),
           ),
-          child: DataTable(
-            columnSpacing: 20.0,
-            columns: const [
-              DataColumn(label: Text('Course Code')),
-              DataColumn(label: Text('Course Name')),
-              DataColumn(label: Text('Timing')),
-              DataColumn(label: Text('Date')),
-              DataColumn(label: Text('Lecturer')),
-            ],
-            rows: courses.map((course) {
-              return DataRow(cells: [
-                DataCell(Text(course.courseCode)),
-                DataCell(Text(course.courseName)),
-                DataCell(Text(course.time)),
-                DataCell(Text(course.day)),
-                DataCell(Text(course.lecturerName)),
-              ]);
-            }).toList(),
+          child: SingleChildScrollView( // Ensure the content is scrollable
+            child: DataTable( // Display course data in a DataTable
+              columnSpacing: 20.0, // Set the spacing between columns
+              columns: const [ // Define the columns
+                DataColumn(label: Text('Course Code')),
+                DataColumn(label: Text('Course Name')),
+                DataColumn(label: Text('Timing')),
+                DataColumn(label: Text('Date')),
+                DataColumn(label: Text('Lecturer')),
+              ],
+              rows: courses.map((course) { // Map the course data to the DataRow widgets
+                return DataRow(cells: [
+                  DataCell(Text(course.courseCode)),
+                  DataCell(Text(course.courseName)),
+                  DataCell(Text(course.time)),
+                  DataCell(Text(course.day)),
+                  DataCell(Text(course.lecturerName)),
+                ]);
+              }).toList(), // Convert the mapped data to a list
+            ),
           ),
         ),
       ),
@@ -145,8 +157,8 @@ class CourseSchedulePage extends StatelessWidget {
   }
 }
 
-void main() {
-  runApp(MaterialApp(
-    home: CourseSchedulePage(),
-  ));
-}
+// void main() {
+//   runApp(MaterialApp(
+//     home: CourseSchedulePage(),
+//   ));
+// }
