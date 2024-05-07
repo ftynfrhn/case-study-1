@@ -10,15 +10,20 @@ class Course {
   final String courseName;
   final String day;
   final String timeSlot;
+  final String userName;
 
-  Course({required this.courseName, required this.day, required this.timeSlot});
+  Course({
+    required this.courseName,
+    required this.day,
+    required this.timeSlot,
+    required this.userName,
+  });
 }
 
 class AdminDashboard extends StatefulWidget {
-  const AdminDashboard({super.key});
+  const AdminDashboard({Key? key}) : super(key: key);
 
   @override
-  // ignore: library_private_types_in_public_api
   _AdminDashboardState createState() => _AdminDashboardState();
 }
 
@@ -31,16 +36,32 @@ class _AdminDashboardState extends State<AdminDashboard> {
   ];
 
   List<Course> courses = [
-    Course(courseName: 'Machine Learning', day: 'Monday', timeSlot: '8:30 AM - 9:50 AM'),
-    Course(courseName: 'Course B', day: 'Tuesday', timeSlot: '10:00 AM - 11:20 AM'),
-    Course(courseName: 'Machine Learning', day: 'Wednesday', timeSlot: '11:30 AM - 12:50 PM'),
-    Course(courseName: 'Introduction to Affective Computing', day: 'Thursday', timeSlot: '11:30 AM - 12:50 PM'),
-    Course(courseName: '', day: 'Friday', timeSlot: '2:00 PM - 3:20 PM'),
-    Course(courseName: 'Course F', day: 'Monday', timeSlot: '2:00 PM - 2:20 PM'),
-    Course(courseName: 'Course G', day: 'Tuesday', timeSlot: '3:30 PM - 4:50 PM'),
-    Course(courseName: 'Course H', day: 'Wednesday', timeSlot: '3:30 PM - 4:50 PM'),
-    Course(courseName: 'Course I', day: 'Thursday', timeSlot: '10:00 AM - 11:20 AM'),
-    Course(courseName: '', day: 'Friday', timeSlot: '10:00 AM - 11:20 AM'),
+    Course(courseName: 'Data Science', day: 'Monday', timeSlot: '8:30 AM - 9:50 AM', userName: 'Saleem el-Habib'),
+    Course(courseName: 'Data Science', day: 'Wednesday', timeSlot: '8:30 AM - 9:50 AM', userName: 'Saleem el-Habib'),
+    Course(courseName: 'Database Programming', day: 'Tuesday', timeSlot: '10:00 AM - 11:20 AM', userName: 'Nafeesa Abdullah'),
+    Course(courseName: 'Database Programming', day: 'Thursday', timeSlot: '10:00 AM - 11:20 AM', userName: 'Nafeesa Abdullah'),
+    Course(courseName: 'Machine Learning', day: 'Wednesday', timeSlot: '11:30 AM - 12:50 PM', userName: 'Naasiruddeen Samra'),
+    Course(courseName: 'Machine Learning', day: 'Monday', timeSlot: '11:30 AM - 12:50 PM', userName: 'Naasiruddeen Samra'),
+    Course(courseName: 'Introduction to Affective Computing', day: 'Tuesday', timeSlot: '11:30 AM - 12:50 PM', userName: 'Khadeeja alali'),
+    Course(courseName: 'Introduction to Affective Computing', day: 'Thursday', timeSlot: '11:30 AM - 12:50 PM', userName: 'Khadeeja alali'),
+    Course(courseName: 'Machine Learning', day: 'Monday', timeSlot: '2:00 PM - 2:20 PM', userName: 'Nafeesa Abdullah'),
+    Course(courseName: 'Machine Learning', day: 'Wednesday', timeSlot: '2:00 PM - 2:20 PM', userName: 'Nafeesa Abdullah'),
+    Course(courseName: 'Big Data Analytics', day: 'Tuesday', timeSlot: '3:30 PM - 4:50 PM', userName: 'Naasiruddeen Samra'),
+    Course(courseName: 'Big Data Analytics', day: 'Thursday', timeSlot: '3:30 PM - 4:50 PM', userName: 'Naasiruddeen Samra'),
+    Course(courseName: 'Data Mining', day: 'Monday', timeSlot: '3:30 PM - 4:50 PM', userName: 'Khadeeja alali'),
+    Course(courseName: 'Data Mining', day: 'Wednesday', timeSlot: '3:30 PM - 4:50 PM', userName: 'Khadeeja alali'),
+    Course(courseName: 'Natural Language Processing', day: 'Tuesday', timeSlot: '10:00 AM - 11:20 AM', userName: 'Saleem el-Habib'),
+    Course(courseName: 'Natural Language Processing', day: 'Thursday', timeSlot: '10:00 AM - 11:20 AM', userName: 'Saleem el-Habib'),
+    Course(courseName: 'Bio-Inspired Computing', day: 'Monday', timeSlot: '10:00 AM - 11:20 AM', userName: 'Saleem el-Habib'),
+    Course(courseName: 'Bio-Inspired Computing', day: 'Wednesday', timeSlot: '10:00 AM - 11:20 AM', userName: 'Saleem el-Habib'),
+    Course(courseName: 'Cryptography', day: 'Monday', timeSlot: '11:30 AM - 12.50 PM', userName: 'Nafeesa Abdullah'),
+    Course(courseName: 'Cryptography', day: 'Wednesday', timeSlot: '11:30 AM - 12.50 PM', userName: 'Nafeesa Abdullah'),
+    Course(courseName: 'Data Science', day: 'Wednesday', timeSlot: '9:00 AM - 10:20 AM', userName: 'Naasiruddeen Samra'),    
+    Course(courseName: 'Data Science', day: 'Monday', timeSlot: '9:00 AM - 10:20 AM', userName: 'Naasiruddeen Samra'),    
+    Course(courseName: 'Data Mining', day: 'Wednesday', timeSlot: '3:30 PM - 4:50 PM', userName: 'Naasiruddeen Samra'),
+    Course(courseName: 'Data Mining', day: 'Monday', timeSlot: '3:30 PM - 4:50 PM', userName: 'Naasiruddeen Samra'),
+    Course(courseName: 'Cryptography', day: 'Tuesday', timeSlot: '8:30 AM - 9:50 AM', userName: 'Khadeeja alali'),
+    Course(courseName: 'Cryptography', day: 'Thursday', timeSlot: '8:30 AM - 9:50 AM', userName: 'Khadeeja alali'),
   ];
 
   User? selectedUser;
@@ -128,6 +149,8 @@ class _AdminDashboardState extends State<AdminDashboard> {
   List<DataRow> _buildCourseRows(User user) {
     List<DataRow> rows = [];
 
+    List<Course> userCourses = courses.where((course) => course.userName == user.name).toList();
+
     // Initialize a map to store courses for each day
     Map<String, List<Course>> coursesByDay = {
       'Monday': [],
@@ -138,7 +161,7 @@ class _AdminDashboardState extends State<AdminDashboard> {
     };
 
     // Group courses by day
-    for (var course in courses) {
+    for (var course in userCourses) {
       if (course.day.isNotEmpty && coursesByDay.containsKey(course.day)) {
         coursesByDay[course.day]!.add(course);
       }
@@ -150,14 +173,14 @@ class _AdminDashboardState extends State<AdminDashboard> {
     }
 
     // Build rows for each time slot
-    List<String> timeSlots = courses.map((course) => course.timeSlot).toSet().toList();
+    List<String> timeSlots = userCourses.map((course) => course.timeSlot).toSet().toList();
     timeSlots.sort();
     for (var timeSlot in timeSlots) {
       List<DataCell> cells = [DataCell(Text(timeSlot))];
 
       for (var day in coursesByDay.keys) {
         List<Course> dayCourses = coursesByDay[day]!;
-        Course? course = dayCourses.firstWhere((c) => c.timeSlot == timeSlot, orElse: () => Course(courseName: '', day: '', timeSlot: ''));
+        Course? course = dayCourses.firstWhere((c) => c.timeSlot == timeSlot, orElse: () => Course(courseName: '', day: '', timeSlot: '', userName: ''));
         cells.add(DataCell(Text(course.courseName)));
       }
 
