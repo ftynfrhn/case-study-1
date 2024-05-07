@@ -126,7 +126,7 @@ class _UserDashboardState extends State<UserDashboard> {
               MaterialPageRoute(builder: (context) => CourseSchedulePage()),
             );
           },
-          child: const Icon(Icons.calendar_today),
+          child: const Icon(Icons.info),
         ),
       );
     }
