@@ -60,10 +60,10 @@ class LoginForm extends StatelessWidget {
 
   // Function to handle form submission
   void _submitForm(BuildContext context) {
-    String username = emailController.text.trim();
+    String email = emailController.text.trim();
     String password = passwordController.text.trim();
 
-    if (username.isEmpty || password.isEmpty) {
+    if (email.isEmpty || password.isEmpty) {
       // Show error message if username or password is empty
       showDialog(
         context: context,
@@ -82,8 +82,8 @@ class LoginForm extends StatelessWidget {
           );
         },
       );
-    } else if (username == 'user1@gmail.com' && password == 'user1' ||
-        username == 'user2@gmail.com' && password == 'user2') {
+    } else if (email == 'user1@gmail.com' && password == 'user1' ||
+        email == 'user2@gmail.com' && password == 'user2') {
       Navigator.push(
         context,
         MaterialPageRoute(builder: (context) => UserDashboard()),
