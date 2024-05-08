@@ -21,19 +21,19 @@
 ## Assigned tasks for each group member
 
 1. All user-related pages - Fatin Farhana
-    - user_login.dart
-    - user_login_form.dart
-    - user_dashboard.dart
+    - user_login.dart (Set user login screen layout & provide navigation to the admin login screen)
+    - user_login_form.dart (Form widget for user login)
+    - user_dashboard.dart (Presenting schedule in tabular format for the user to view, edit, and manage their course details)
 2. All admin-related pages - Balqis Haifa
     - admin_login.dart
     - admin_login_form.dart
     - admin_dashboard.dart
     - course_schedule_page.dart
 3. Other additional components - Fatin Farhana
-    - main.dart
-    - responsive.dart
-    - constants.dart
-    - background.dart
+    - main.dart (Configures the app's theme, title, and home screen)
+    - responsive.dart (Adapt the UI to different screen sizes)
+    - constants.dart (Define a set of constants that will be used throughout the app)
+    - background.dart (Create a background for the app and ensures the background is properly adjusted to the screen size)
   
 ## References
 
